@@ -1,0 +1,98 @@
+﻿@page "/"
+
+<PageTitle>Home</PageTitle>
+
+<h1>Hello, world!</h1>
+
+<EditForm Model="model" enctype="multipart/form-data" FormName="CreateCourse" OnValidSubmit="HandleValidSubmit">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="mb-5">
+        <label for="fName"
+               class="text-[#07074D] mb-3 block text-base font-medium">
+            Overskriften
+        </label>
+        <InputText @bind-Value="model.Input"
+                   class="border-[#e0e0e0] text-[#6B7280] bg-white px-6 py-3 w-full appearance-none rounded-md border text-base font-medium outline-none focus:border-[#6A64F1] focus:shadow-md"
+                   placeholder="Overskriften" />
+    </div>
+    <div class="mb-5">
+        <label for="fName"
+               class="text-[#07074D] mb-3 block text-base font-medium">
+            Område
+        </label>
+        <InputSelect @bind-Value="model.DropdownText" class="border-[#e0e0e0] text-[#6B7280] bg-white px-6 py-3 w-full appearance-none rounded-md border text-base font-medium outline-none focus:border-[#6A64F1] focus:shadow-md">
+            @foreach (var item in listTopicMain)
+            {
+                <option value="@item.dropId">@item.Text</option>
+            }
+        </InputSelect>
+    </div>
+    <div>
+        <button class="bg-[#6A64F1] px-8 py-3 text-white rounded-md text-center text-base font-semibold outline-none hover:shadow-form">
+            Opret kursus
+        </button>
+    </div>
+</EditForm>
+
+@code {
+    formModel model { get; set; } = new formModel();
+    public List<dropdownModel> listTopicMain { get; set; } = new List<dropdownModel>();
+
+    public class formModel
+    {
+        public string Input { get; set; }
+        public string DropdownText { get; set; }
+    }
+
+    public class dropdownModel
+    {
+        public int dropId { get; set; }
+        public string Text { get; set; }
+    }
+
+    private async Task HandleValidSubmit()
+    {
+
+    }
+
+    protected override async Task OnInitializedAsync()
+    {
+        listTopicMain.Add(new dropdownModel
+        {
+dropId = 1,
+Text = "Nordsjælland",
+        });
+        listTopicMain.Add(new dropdownModel
+            {
+                dropId = 1,
+                Text = "København",
+            });
+        listTopicMain.Add(new dropdownModel
+            {
+                dropId = 1,
+                Text = "Sjælland",
+            });
+        listTopicMain.Add(new dropdownModel
+            {
+                dropId = 1,
+                Text = "Fyn",
+            });
+        listTopicMain.Add(new dropdownModel
+            {
+                dropId = 1,
+                Text = "Nordjylland",
+            });
+        listTopicMain.Add(new dropdownModel
+            {
+                dropId = 1,
+                Text = "Midtjylland",
+            });
+        listTopicMain.Add(new dropdownModel
+            {
+                dropId = 1,
+                Text = "Sydjylland",
+            });
+
+    }
+}
